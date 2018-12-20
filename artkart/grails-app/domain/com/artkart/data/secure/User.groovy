@@ -10,6 +10,11 @@ import grails.compiler.GrailsCompileStatic
 class User implements Serializable {
 
     private static final long serialVersionUID = 1
+    String firstName
+    String lastName
+    Integer age
+    String mobileNumber
+    String email
 
     String username
     String password
