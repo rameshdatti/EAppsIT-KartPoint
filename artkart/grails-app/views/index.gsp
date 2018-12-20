@@ -36,12 +36,10 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Installed Plugins <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                    <li><a href="#">${plugin.name} - ${plugin.version}</a></li>
-                </g:each>
-            </ul>
+            <sec:ifLoggedIn>
+                        Hello ${ sec.loggedInUserInfo(field: 'username')} !
+                        <g:link controller="user" action="viewProfile">View Profile</g:link>
+            </sec:ifLoggedIn>
         </li>
     </content>
 
@@ -53,23 +51,19 @@
 
     <div id="content" role="main">
         <section class="row colset-2-its">
-            <h1>Welcome to Grails</h1>
-
-            <p>
-                Congratulations, you have successfully started your first Grails application! At the moment
-                this is the default page, feel free to modify it to either redirect to a controller or display
-                whatever content you may choose. Below is a list of controllers that are currently deployed in
-                this application, click on each to execute its default action:
-            </p>
+            <h1>Welcome to ArtKart</h1>
 
             <div id="controllers" role="navigation">
-                <h2>Available Controllers:</h2>
+                <h2>Available Services:</h2>
                 <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller">
-                            <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
+                    <li>
+                        <g:link controller="item" action="index">Item List</g:link>
+                    </li>
+                    <sec:ifLoggedIn>
+                        <li>
+                            <g:link controller="cart" action="show">Go To Cart</g:link>
                         </li>
-                    </g:each>
+                    </sec:ifLoggedIn>
                 </ul>
             </div>
         </section>
