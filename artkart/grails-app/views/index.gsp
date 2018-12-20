@@ -39,7 +39,11 @@
             <sec:ifLoggedIn>
                         Hello ${ sec.loggedInUserInfo(field: 'username')} !
                         <g:link controller="user" action="viewProfile">View Profile</g:link>
+                        <g:link controller="logout" action="index">Logout</g:link>
             </sec:ifLoggedIn>
+            <sec:ifNotLoggedIn>
+                <g:link controller="login" action="auth">Login</g:link>
+            </sec:ifNotLoggedIn>
         </li>
     </content>
 

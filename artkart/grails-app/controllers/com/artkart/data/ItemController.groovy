@@ -10,7 +10,7 @@ class ItemController {
     ItemService itemService
     def springSecurityService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
+    @Secured('permitAll')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         User user=springSecurityService.currentUser
@@ -39,13 +39,7 @@ class ItemController {
             return
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'item.label', default: 'Item'), item.id])
-                redirect item
-            }
-            '*' { respond item, [status: CREATED] }
-        }
+        redirect(action: "index")
     }
 
     def edit(Long id) {
